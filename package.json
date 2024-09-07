@@ -6,6 +6,7 @@
     "node": ">=20.0.0 <21.0.0"
   },
   "scripts": {
+    "start": "node dist/apps/backend/main.js",
     "dev": "npx nx run-many --target=serve --projects=frontend,backend,workers --parallel=4",
     "dev:stripe": "npx concurrently \"stripe listen --forward-to localhost:3000/stripe\" \"npm run dev\"",
     "start:prod": "node dist/apps/backend/main.js",
@@ -18,7 +19,8 @@
     "prisma-generate": "cd ./libraries/nestjs-libraries/src/database/prisma && npx prisma generate",
     "prisma-db-push": "cd ./libraries/nestjs-libraries/src/database/prisma && npx prisma db push",
     "prisma-reset": "cd ./libraries/nestjs-libraries/src/database/prisma && npx prisma db push --force-reset && npx prisma db push",
-    "postinstall": "npm run prisma-generate"
+    "postinstall": "npm run prisma-generate",
+    "build": "npx nx build backend"
   },
   "private": true,
   "dependencies": {
