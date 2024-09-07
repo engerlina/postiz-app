@@ -7,11 +7,11 @@
   },
   "scripts": {
     "start": "node dist/apps/backend/main.js",
+    "start:workers": "node dist/apps/workers/main.js",
+    "start:cron": "node dist/apps/cron/main.js",
+    "build": "npm run prisma-generate && npx nx run-many --target=build --projects=backend,workers,cron",
     "dev": "npx nx run-many --target=serve --projects=frontend,backend,workers --parallel=4",
     "dev:stripe": "npx concurrently \"stripe listen --forward-to localhost:3000/stripe\" \"npm run dev\"",
-    "start:prod": "node dist/apps/backend/main.js",
-    "start:prod:workers": "node dist/apps/workers/main.js",
-    "start:prod:cron": "node dist/apps/cron/main.js",
     "docs": "npx nx run docs:serve:development",
     "workers": "npx nx run workers:serve:development",
     "cron": "npx nx run cron:serve:development",
@@ -19,8 +19,7 @@
     "prisma-generate": "cd ./libraries/nestjs-libraries/src/database/prisma && npx prisma generate",
     "prisma-db-push": "cd ./libraries/nestjs-libraries/src/database/prisma && npx prisma db push",
     "prisma-reset": "cd ./libraries/nestjs-libraries/src/database/prisma && npx prisma db push --force-reset && npx prisma db push",
-    "postinstall": "npm run prisma-generate",
-    "build": "npx nx build backend"
+    "postinstall": "npm run prisma-generate"
   },
   "private": true,
   "dependencies": {
